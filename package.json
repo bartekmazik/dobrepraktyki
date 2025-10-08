@@ -1,0 +1,29 @@
+{
+  "name": "dobrepraktyki",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node src/app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bartekmazik/dobrepraktyki.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bartekmazik/dobrepraktyki/issues"
+  },
+  "homepage": "https://github.com/bartekmazik/dobrepraktyki#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^4.17.1",
+    "jest": "^29.7.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
