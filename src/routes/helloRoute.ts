@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { getHelloWorld } from "../controllers/helloController";
 
-const router = Router();
+const helloRouter = Router();
 
-router.get("/", getHelloWorld);
+helloRouter.get("/", getHelloWorld);
 
-export default router;
+export default helloRouter;
