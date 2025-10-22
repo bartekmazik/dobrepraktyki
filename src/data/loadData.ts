@@ -62,17 +62,23 @@ async function loadMovieData(): Promise<MovieInterface[] | void> {
     const header = lines.shift();
     if (!header) return [];
 
-    const movies: MovieInterface[] = lines.map((line) => {
-      const [id, title, genres] = line.split(",");
+    const movies = await Promise.all(
+      lines.map(async (line) => {
+        const [id, title, genres] = line.split(",");
 
-      await prisma.movies.create({
-        data: {
-          id: id?.trim() || "",
-          title: title?.trim() || "",
-          Genres: genres?.trim() || "",
-        },
-      });
-    });
+        const movie = await prisma.movies.create({
+          data: {
+            id: id?.trim() || "",
+            title: title?.trim() || "",
+            genres: genres?.trim() || "",
+          },
+        });
+
+        return movie;
+      })
+    );
+
+    return movies;
   } catch (error) {
     console.error("Error reading file:", error);
     throw error;
@@ -80,7 +86,6 @@ async function loadMovieData(): Promise<MovieInterface[] | void> {
 }
 
 //load ratings data
-
 async function loadRatingsData(): Promise<ratingInterface[] | void> {
   try {
     const existingData = await prisma.ratings.findFirst({
@@ -97,16 +102,22 @@ async function loadRatingsData(): Promise<ratingInterface[] | void> {
     const header = lines.shift();
     if (!header) return [];
 
-    const ratings: ratingInterface[] = lines.map((line) => {
-      const [userId, movieId, rating, timestamp] = line.split(",");
+    const ratings = await Promise.all(
+      lines.map(async (line) => {
+        const [userId, movieId, rating, timestamp] = line.split(",");
 
-      return {
-        userId: userId?.trim() || "",
-        movieId: movieId?.trim() || "",
-        rating: rating?.trim() || "",
-        timestamp: timestamp?.trim() || "",
-      };
-    });
+        const ratingRecord = await prisma.ratings.create({
+          data: {
+            userId: userId?.trim() || "",
+            movieId: movieId?.trim() || "",
+            rating: rating?.trim() || "",
+            timestamp: timestamp?.trim() || "",
+          },
+        });
+
+        return ratingRecord;
+      })
+    );
 
     return ratings;
   } catch (error) {
@@ -116,7 +127,6 @@ async function loadRatingsData(): Promise<ratingInterface[] | void> {
 }
 
 //load tags data
-
 async function loadTagsData(): Promise<TagInterface[] | void> {
   try {
     const existingData = await prisma.tags.findFirst({
@@ -133,16 +143,22 @@ async function loadTagsData(): Promise<TagInterface[] | void> {
     const header = lines.shift();
     if (!header) return [];
 
-    const tags: TagInterface[] = lines.map((line) => {
-      const [userId, movieId, tag, timestamp] = line.split(",");
+    const tags = await Promise.all(
+      lines.map(async (line) => {
+        const [userId, movieId, tag, timestamp] = line.split(",");
 
-      return {
-        userId: userId?.trim() || "",
-        movieId: movieId?.trim() || "",
-        tag: tag?.trim() || "",
-        timestamp: timestamp?.trim() || "",
-      };
-    });
+        const tagRecord = await prisma.tags.create({
+          data: {
+            userId: userId?.trim() || "",
+            movieId: movieId?.trim() || "",
+            tag: tag?.trim() || "",
+            timestamp: timestamp?.trim() || "",
+          },
+        });
+
+        return tagRecord;
+      })
+    );
 
     return tags;
   } catch (error) {

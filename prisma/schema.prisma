@@ -12,30 +12,33 @@ datasource db {
 }
 
 model Movies {
-  id    String @id
-  title String 
-  Genres String
+  id     String @id
+  title  String 
+  genres String
 }
-
 
 model Tags {
-  userId   String @id
-  movieId String 
-  tag String
+  id        Int    @id @default(autoincrement())
+  userId    String
+  movieId   String 
+  tag       String
   timestamp String
+  
+  @@unique([userId, movieId, tag])
 }
-
 
 model Links {
   movieId String @id
-  imdbId String
-  tmdbId String
+  imdbId  String
+  tmdbId  String
 }
 
-
 model Ratings {
-  userId String @id
-  movieId String
-  rating String
+  id        Int    @id @default(autoincrement())
+  userId    String
+  movieId   String
+  rating    String
   timestamp String
+  
+  @@unique([userId, movieId])
 }

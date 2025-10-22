@@ -13,7 +13,7 @@ export const getMovies = async (
       select: {
         id: true,
         title: true,
-        Genres: true,
+        genres: true,
       },
     });
     res.json(data);
