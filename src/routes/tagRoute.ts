@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getTags } from "../controllers/tagsController";
+import { getTags } from "../controllers/movies/tagsController";
 const tagRouter = Router();
 
 tagRouter.get("/", getTags);

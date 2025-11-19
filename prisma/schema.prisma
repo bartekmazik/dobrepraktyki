@@ -1,5 +1,9 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+enum UserRole {
+  USER
+  ADMIN
+}
 
 generator client {
   provider = "prisma-client-js"
@@ -15,6 +19,13 @@ model Movies {
   id     String @id
   title  String 
   genres String
+}
+
+model User {
+  id        Int    @id @default(autoincrement())
+  email String
+  hash String
+  role UserRole
 }
 
 model Tags {

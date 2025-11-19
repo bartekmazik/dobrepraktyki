@@ -1,19 +1,20 @@
 import { Request, Response, NextFunction } from "express";
 import { promises as fs } from "fs";
-import { MovieInterface } from "../models/movie";
-import { prisma } from "../data/db";
+import { TagInterface } from "../../models/tag";
+import { prisma } from "../..//data/db";
 
-export const getMovies = async (
+export const getTags = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const data = await prisma.movies.findMany({
+    const data = await prisma.tags.findMany({
       select: {
-        id: true,
-        title: true,
-        genres: true,
+        movieId: true,
+        userId: true,
+        timestamp: true,
+        tag: true,
       },
     });
     res.json(data);

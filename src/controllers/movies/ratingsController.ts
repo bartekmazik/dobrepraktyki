@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { promises as fs } from "fs";
-import { ratingInterface } from "../models/rating";
-import { prisma } from "../data/db";
+import { ratingInterface } from "../../models/rating";
+import { prisma } from "../../data/db";
 
 export const getRatings = async (
   req: Request,

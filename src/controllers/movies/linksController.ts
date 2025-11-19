@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { prisma } from "../data/db";
+import { prisma } from "../../data/db";
 
 export const getLinks = async (
   req: Request,
