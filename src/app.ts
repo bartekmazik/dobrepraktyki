@@ -11,6 +11,7 @@ import { loginController } from "./controllers/auth/loginController";
 import { authMiddleware } from "./middleware/authMiddleware";
 import { usersController } from "./controllers/auth/usersController";
 import { userDetailsController } from "./controllers/users/userDetailsController";
+import { getPeopleCount } from "./controllers/analyzer/analyzeController";
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/api/tags", authMiddleware, getTags);
 app.post("/api/login", loginController);
 app.post("/api/users", authMiddleware, usersController);
 app.get("/api/user_details", authMiddleware, userDetailsController);
+app.get("/api/get_people_count", getPeopleCount);
 
 app.use(errorHandler);
 
